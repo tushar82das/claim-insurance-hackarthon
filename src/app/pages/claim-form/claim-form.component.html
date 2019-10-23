@@ -1,0 +1,141 @@
+<div class="row">
+  <div class="banner">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-3">&nbsp;</div>
+  <div class="col-sm-6">
+    <div class="text-center mb-4">
+      <h1 class="h3 mb-3 font-weight-normal">&nbsp;</h1>
+    </div>
+    <div class="row" style="min-height: 400px;">
+      <div class="col-sm-12">
+        <app-alert [visible]="isAlert" [type]="alertType" [msg]="alertMsg" (alertCloseEvent)="closeAlertBox()">
+        </app-alert>
+        <form class="form-signin" [formGroup]="claimForm" (ngSubmit)="onSubmit(claimForm.status)">
+          <app-alert [visible]="isLoginError" [type]="laertType" [msg]="alertMsg" (alertCloseEvent)="closeAlertBox()">
+          </app-alert>
+          <div *ngIf="!isPolicyVerified" class="row">
+            <div class="col-sm-9">
+              <div class="form-label-group">
+                <input type="text" id="policyId" formControlName="policyId" class="form-control"
+                  placeholder="Policy Number">
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <button type="button" class="btn btn-lg btn-primary-ing" (click)="verifyPolicy()"
+                style="width: 100px;">Find</button>
+            </div>
+          </div>
+          <div *ngIf="isPolicyVerified">
+            <div class="row">
+              <div class="col-sm-7">
+                <h5>Policy Detail:</h5>
+              </div>
+              <div class="col-sm-5">
+                <button type="button" class="btn btn-outline-success" (click)="verifyPolicyAgain()">Change Policy
+                  Number</button>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-6">
+                <strong>Policy Holder Name: </strong> {{policyHolderName}}
+              </div>
+              <div class="col-sm-6">
+                <strong>Policy Number: </strong> {{policyNumber}}
+              </div>
+              <br><br>
+              <div class="col-sm-6">
+                <strong>Date of Birth: </strong> {{policyDOB}}
+              </div>
+              <div class="col-sm-6">
+                <strong>Policy Amount: </strong> {{policyAmount}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-label-group">
+                  <select class="form-control" id="hospitalName" formControlName="hospitalName" style="height: 50px;">
+                    <option value="">Hospital Name *</option>
+                    <option *ngFor="let hospital of hospitals" value="{{hospital.hospitalName}}">
+                      {{hospital.hospitalName}}</option>
+                  </select>
+                  <span class="error"
+                    *ngIf="(hospitalName.dirty || hospitalName.touched) && hospitalName.invalid && hospitalName.errors.required">
+                    Hospital Name is required.
+                  </span>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-label-group">
+                  <input type="text" id="diagnosis" formControlName="diagnosis" class="form-control"
+                    placeholder="Diagnosis *">
+                  <span class="error"
+                    *ngIf="(diagnosis.dirty || diagnosis.touched) && diagnosis.invalid && diagnosis.errors.required">
+                    Diagnosis is required.
+                  </span>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-label-group">
+                  <input type="text" id="ailment" formControlName="ailment" class="form-control"
+                    placeholder="Ailment *">
+                  <span class="error"
+                    *ngIf="(ailment.dirty || ailment.touched) && ailment.invalid && ailment.errors.required">
+                    Ailment is required.
+                  </span>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-label-group">
+                  <input type="text" id="requestedClaimAmount" formControlName="requestedClaimAmount"
+                    class="form-control" placeholder="Claim Amount *">
+                  <span class="error"
+                    *ngIf="(requestedClaimAmount.dirty || requestedClaimAmount.touched) && requestedClaimAmount.invalid && requestedClaimAmount.errors.required">
+                    Claim Amount is required.
+                  </span>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-label-group">
+                  <input type="file" id="document" formControlName="document" class="form-control"
+                    placeholder="Upload Documents">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-label-group">
+                  <p-calendar [(ngModel)]="date1" id="admissionDate" formControlName="admissionDate" [showIcon]="true"
+                    placeholder="Admission Date *" dateFormat="dd/mm/yy"></p-calendar>
+                  <br>
+                  <span class="error"
+                    *ngIf="(admissionDate.dirty || admissionDate.touched) && admissionDate.invalid && admissionDate.errors.required">
+                    Admission Date is required.
+                  </span>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-label-group">
+                  <p-calendar [(ngModel)]="date2" id="dischargeDate" formControlName="dischargeDate" [showIcon]="true"
+                    placeholder="Discharge Date *" dateFormat="dd/mm/yy"></p-calendar>
+                  <br>
+                  <span class="error"
+                    *ngIf="(dischargeDate.dirty || dischargeDate.touched) && dischargeDate.invalid && dischargeDate.errors.required">
+                    Discharge Date is required.
+                  </span>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <button class="btn btn-lg btn-primary-ing btn-block" type="submit" [disabled]="!claimForm.valid">Submit
+                  Claim</button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <br><br>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">&nbsp;</div>
+</div>

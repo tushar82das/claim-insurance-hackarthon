@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-sm-3">&nbsp;</div>
+  <div class="col-sm-6" style="height: 450px;">
+    <p>&nbsp;</p>
+    <div class="text-center mb-4">
+      <h1 class="h3 mb-3 font-weight-normal">{{title}}</h1>
+    </div>
+    <app-login [title]="title" (loginEvent)="onLoginSuccess($event)"></app-login>
+  </div>
+  <div class="col-sm-3">&nbsp;</div>
+</div>

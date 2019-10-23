@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-sm-3">
+    <app-profile></app-profile>
+  </div>
+  <div class="col-sm-9">
+    <div class="card">
+      <div class="card-header bg-secondary text-white"><strong>Claims List</strong></div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <div *ngFor="let claim of claims">
+              <p-card header="Claim ID# {{claim.claimId}}" subheader="Status: {{claim.status}}"
+                [style]="{width: '100%'}" styleClass="ui-card-shadow">
+                <table>
+                  <tr>
+                    <td style="width: 9%;"><strong>Policy #:</strong></td>
+                    <td style="width: 12%;">{{claim.policyId}}</td>
+                    <td style="width: 8%;"><strong>Diagnosis:</strong></td>
+                    <td style="width: 8%;">{{claim.diagnosis}}</td>
+                    <td style="width: 12%;"><strong>Admission Date:</strong></td>
+                    <td style="width: 12%;">{{claim.admissionDate}}</td>
+                    <td style="width: 12%;"><strong>Policy Amount:</strong></td>
+                    <td style="width: 12%;">{{claim.claimAmount | currency:'INR'}}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Claim Date:</strong></td>
+                    <td>{{claim.claimDate}}</td>
+                    <td><strong>Ailment:</strong></td>
+                    <td>{{claim.ailment}}</td>
+                    <td><strong>Discharge Date:</strong></td>
+                    <td>{{claim.dischargeDate}}</td>
+                    <td><strong>Claim Amount:</strong></td>
+                    <td>{{claim.requestedClaimAmount | currency:'INR'}}</td>
+                  </tr>
+                </table>
+                <p-footer>
+                  <button type="button" class="btn btn-primary" [routerLink]="['/claim-detail',claim.claimId]">View
+                    Claim</button>
+                </p-footer>
+              </p-card><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

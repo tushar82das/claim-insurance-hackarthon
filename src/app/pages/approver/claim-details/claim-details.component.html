@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="col-sm-3">
+    <app-profile></app-profile>
+  </div>
+  <div class="col-sm-9">
+    <div class="card">
+      <div class="card-header bg-secondary text-white"><strong>Claim Details</strong></div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-12">
+            <div>
+              <p-card *ngIf="claim.claimId" header="Claim ID# {{claim.claimId}}" subheader="Status: {{claim.status}}"
+                [style]="{width: '100%'}" styleClass="ui-card-shadow">
+                <div *ngIf="isLoadingShow" style="height: 150px;">
+                  <app-loader [display]="isLoadingShow"></app-loader>
+                </div>
+                <div *ngIf="!isLoadingShow">
+                  <table>
+                    <tr>
+                      <td style="width: 9%;"><strong>Policy #:</strong></td>
+                      <td style="width: 12%;" *ngIf="claim.policyId">{{claim.policyId}}</td>
+                      <td style="width: 8%;"><strong>Diagnosis:</strong></td>
+                      <td style="width: 8%;" *ngIf="claim.diagnosis">{{claim.diagnosis}}</td>
+                      <td style="width: 12%;"><strong>Admission Date:</strong></td>
+                      <td style="width: 12%;" *ngIf="claim.admissionDate">{{claim.admissionDate}}</td>
+                      <td style="width: 12%;"><strong>Policy Amount:</strong></td>
+                      <td style="width: 12%;" *ngIf="claim.claimAmount">{{claim.claimAmount | currency:'INR'}}</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Claim Date:</strong></td>
+                      <td *ngIf="claim.claimDate">{{claim.claimDate}}</td>
+                      <td><strong>Ailment:</strong></td>
+                      <td *ngIf="claim.ailment">{{claim.ailment}}</td>
+                      <td><strong>Discharge Date:</strong></td>
+                      <td *ngIf="claim.dischargeDate">{{claim.dischargeDate}}</td>
+                      <td><strong>Claim Amount:</strong></td>
+                      <td *ngIf="claim.requestedClaimAmount">{{claim.requestedClaimAmount | currency:'INR'}}</td>
+                    </tr>
+                  </table>
+                  <strong *ngIf="claim.hospitalName">Hospital Name:</strong> {{claim.hospitalName}}
+                  <hr>
+                  <!--Progress Bar Start-->
+                  <ol class="progtrckr" data-progtrckr-steps="6">
+                    <li class="progtrckr-done">Pending</li>
+                    <li class="progtrckr-{{(approvedL1)?'done':'todo'}}">Approved By L1</li>
+                    <li class="progtrckr-{{(approvedL2)?'done':'todo'}}">Approved By L2</li>
+                  </ol><br>
+                  <!--Progress Bar Start-->
+                  <hr>
+                  <strong *ngIf="claim.approver1Comment">Approver-1 Comments:</strong><br>
+                  {{claim.approver1Comment}}<br><br>
+                  <strong *ngIf="claim.approver2Comment">Approver-2 Comments:</strong><br>
+                  {{claim.approver2Comment}}<br><br>
+                  <hr>
+                  <div class="form-check-inline">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="levelStatus" value="complete"
+                        (change)="onChangeLevelStatus($event)" [checked]="isCheckedFirst">Approve Claim
+                    </label>
+                  </div>
+                  <div class="form-check-inline">
+                    <label class="form-check-label">
+                      <input type="radio" class="form-check-input" name="levelStatus" value="not-complete"
+                        (change)="onChangeLevelStatus($event)" [checked]="isCheckedSecond">Send to Level 2
+                    </label>
+                  </div>
+                  <br><br>
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="comments" [(ngModel)]="comments"
+                      placeholder="Comments">
+                  </div>
+                  <hr>
+                  <p-footer>
+                    <button type="button" class="btn btn-success" (click)="approveClaim()"><i class="fa fa-check"
+                        aria-hidden="true"></i>
+                      Approve</button>&nbsp;
+                    <button type="button" class="btn btn-danger" disabled (click)="rejectClaim()"><i class="fa fa-times"
+                        aria-hidden="true"></i>
+                      Reject</button>
+                  </p-footer>
+                </div>
+                <br><br>
+                <app-alert [visible]="isAlert" [type]="alertType" [msg]="alertMsg" (alertCloseEvent)="closeAlertBox()">
+                </app-alert>
+
+              </p-card><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

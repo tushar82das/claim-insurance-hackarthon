@@ -1,0 +1,23 @@
+<ng-container *ngTemplateOutlet="profileTemplate; context:ctx"></ng-container>
+
+<ng-template #profileTemplate let-userName="name" let-userRole="role">
+  <div class="card">
+    <div class="card-header bg-secondary text-white"><strong>Approver Profile</strong></div>
+    <div class="card-body">
+      <div style="text-align: center;">
+        <img class="card-img-top" src="./assets/images/avatar.png" alt="Card image" style="width:150px;">
+      </div>
+      <br>
+      <h4 class="card-title" style="text-align: left;">{{userName | titlecase}}</h4>
+      <p class="card-text">
+        <strong>Role: </strong>{{userRole}} <br>
+      </p>
+      <hr><br>
+      <p class="card-text">
+        <button type="button" routerLink="/dashboard" class="btn btn-primary" style="width: 100%;">Claims
+          List</button><br><br>
+      </p>
+      <br>
+    </div>
+  </div>
+</ng-template>

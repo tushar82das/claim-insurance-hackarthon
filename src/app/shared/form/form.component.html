@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-sm-12">
+    <form class="form-signup" *ngIf="registerForm" [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.valid)">
+      <div class="form-label-group">
+        <input type="text" id="userName" formControlName="userName" class="form-control" placeholder="Name *">
+        <span class="error"
+          *ngIf="(userName.dirty || userName.touched) && userName.invalid && userName.errors.required">
+          Name is required.
+        </span>
+      </div>
+      <div class="form-label-group">
+        <input type="email" id="email" formControlName="email" class="form-control" placeholder="Email Address *">
+        <span class="error" *ngIf="(email.dirty || email.touched) && email.invalid && email.errors.required">
+          Email is required.
+        </span>
+        <span class="error" *ngIf="(email.dirty || email.touched) && email.invalid && email.errors.email">
+          Value has to be a valid email address.
+        </span>
+      </div>
+      <div class="form-label-group">
+        <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password *">
+        <span class="error" class="error"
+          *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.required">
+          Password is required.
+        </span>
+        <span class="error" class="error"
+          *ngIf="(password.dirty || password.touched) && password.invalid && password.errors.minlength">
+          Please provide minimum 6 characters.
+        </span>
+      </div>
+      <div class="form-label-group">
+        <input type="text" id="contact" formControlName="contact" class="form-control" placeholder="Contact *">
+        <span class="error" *ngIf="(contact.dirty || contact.touched) && contact.invalid && contact.errors.required">
+          Contact number is required.
+        </span>
+      </div>
+      <div class="row">
+        <div class="col-sm-9">
+          <button type="submit" class="btn btn-lg btn-primary-ing" [disabled]="!registerForm.valid"
+            style="width: 100%; margin-top: 5px;">Sign Up</button>
+        </div>
+        <div class="col-sm-3">
+          <button type="button" class="btn btn-lg btn-secondary" (click)="revert()"
+            style="width: 100%; margin-top: 5px;">Reset</button>
+        </div>
+      </div>
+      <p>
+        <br>
+        <a routerLink="/login">Registered User/Login</a>
+      </p>
+    </form>
+  </div>
+</div>
